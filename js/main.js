@@ -75,7 +75,22 @@ document.addEventListener('DOMContentLoaded', () => {
   createBoard(userGrid, userSquares)
   createBoard(computerGrid, computerSquares)
 
-  
+   //Function for places the computers ships in random locations
+   function generate(ship) {
+    let randomDirection = Math.floor(Math.random() * ship.directions.length)
+    let current = ship.directions[randomDirection]
+    if (randomDirection === 0) direction = 1
+    if (randomDirection === 1) direction = 10
+    let randomStart = Math.abs(Math.floor(Math.random() * computerSquares.length - (ship.directions[0].length * direction)))
+
+    const isTaken = current.some(index => computerSquares[randomStart + index].classList.contains('taken'))
+    const isAtRightEdge = current.some(index => (randomStart + index) % width === width - 1)
+    const isAtLeftEdge = current.some(index => (randomStart + index) % width === 0)
+
+    if (!isTaken && !isAtRightEdge && !isAtLeftEdge) current.forEach(index => computerSquares[randomStart + index].classList.add('taken', ship.name))
+
+    else generate(ship)
+  }
 
   generate(shipArray[0])
   generate(shipArray[1])
@@ -179,6 +194,22 @@ document.addEventListener('DOMContentLoaded', () => {
       function dragEnd() {
         console.log('dragend')
       }
+
+      //Game Logic
+  function playGame() {
+    if (isGameOver) return
+    if (currentPlayer === 'user') {
+      turnDisplay.innerHTML = 'Your Turn'
+      computerSquares.forEach(square => square.addEventListener('click', function(e) {
+        revealSquare(square)
+      }))
+    }
+    if (currentPlayer === 'computer') {
+      turnDisplay.innerHTML = 'Computers Turn'
+      setTimeout(computerGo, 1000)
+    }
+  }
+  startButton.addEventListener('click', playGame)
 
       function checkForWins() {
         if (destroyerCount === 2) {
