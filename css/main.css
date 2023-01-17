@@ -24,3 +24,40 @@ body {
   .grid > div {
     border: solid 1px rgba(0, 0, 0, 0.787);
   }
+  
+  .taken, .ship {
+    background-color: gray;
+  }
+
+  .grid-display {
+    display: flex;
+  }
+  
+  .ship > div {
+    width: 4.6vmin;
+    height: 4.6vmin;
+  }
+  
+  .ship {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1vmin;
+    width: calc(4.6vmin * var(--width, 1));
+    height: calc(4.6vmin * var(--height, 1));
+  }
+
+  .destroyer-container {
+    --width: 2;
+   }
+
+   .submarine-container, .cruiser-container {
+    --width: 3;
+  }
+
+  .battleship-container {
+    --width: 4;
+  }
+
+  .carrier-container {
+    --width: 5;
+  }
