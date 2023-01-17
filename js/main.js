@@ -52,9 +52,16 @@ document.addEventListener('DOMContentLoaded', () => {
         },
     ]
 
+    //Game Control Constants
+    const startButton = document.querySelector('#start')
     const rotateButton = document.querySelector('#rotate')
-    let isHorizontal = true
+    const turnDisplay = document.querySelector('#which-turn')
+    const infoDisplay = document.querySelector('#info')
 
+    //App's State
+    let currentPlayer = 'user'
+    let isHorizontal = true
+    let isGameOver = false
 
     //Function for creating the board
     function createBoard(grid, squares) {
@@ -171,6 +178,62 @@ document.addEventListener('DOMContentLoaded', () => {
     
       function dragEnd() {
         console.log('dragend')
+      }
+
+      function checkForWins() {
+        if (destroyerCount === 2) {
+          infoDisplay.innerHTML = 'You sunk the computers destroyer'
+          destroyerCount = 10
+        }
+        if (submarineCount === 3) {
+          infoDisplay.innerHTML = 'You sunk the computers submarine'
+          submarineCount = 10
+        }
+        if (cruiserCount === 3) {
+          infoDisplay.innerHTML = 'You sunk the computers cruiser'
+          cruiserCount = 10
+        }
+        if (battleshipCount === 4) {
+          infoDisplay.innerHTML = 'You sunk the computers battleship'
+          battleshipCount = 10
+        }
+        if (carrierCount === 5) {
+          infoDisplay.innerHTML = 'You sunk the computers carrier'
+          carrierCount = 10
+        }
+        if (cpuDestroyerCount === 2) {
+          infoDisplay.innerHTML = 'You sunk the computers Destroyer'
+          cpuDestroyerCount = 10
+        }
+        if (cpuSubmarineCount === 3) {
+          infoDisplay.innerHTML = 'You sunk the computers Submarine'
+          cpuSubmarineCount = 10
+        }
+        if (cpuCruiserCount === 3) {
+          infoDisplay.innerHTML = 'You sunk the computers Cruiser'
+          cpuCruiserCount = 10
+        }
+        if (cpuBattleshipCount === 4) {
+          infoDisplay.innerHTML = 'You sunk the computers Battleship'
+          cpuBattleshipCount = 10
+        }
+        if (cpuCarrierCount === 5) {
+          infoDisplay.innerHTML = 'You sunk the computers Carrier'
+          cpuCarrierCount = 10
+        }
+        if ((destroyerCount + submarineCount + cruiserCount + battleshipCount + carrierCount) === 50) {
+          infoDisplay.innerHTML = "YOU WIN"
+          gameOver()
+        }
+        if ((cpuDestroyerCount + cpuSubmarineCount + cpuCruiserCount + cpuBattleshipCount + cpuCarrierCount) === 50) {
+          infoDisplay.innerHTML = "COMPUTER WINS"
+          gameOver()
+        }
+      }
+    
+      function gameOver() {
+        isGameOver = true
+        startButton.removeEventListener('click', playGame)
       }
     
 })

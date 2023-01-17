@@ -86,3 +86,11 @@ body {
     --width:1;
   
   }
+
+  .hit {
+    background-color: red !important;
+  }
+  
+  .miss {
+     background-color: black;
+  }
