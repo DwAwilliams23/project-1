@@ -1,5 +1,26 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+body {
+    background-color: rgb(36, 36, 124);
+    text-align: center;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  h1 {
+    font-size: 50px;
+    display: inline-block;
+  }
+
+  .grid {
+    margin: 2vmin;
+    display: grid;
+    background-color: rgb(114, 202, 234);
+    grid-template-columns: repeat(10, 4.6vmin);
+    grid-template-rows: repeat(10, 4.6vmin);
+  }
+  
+  .grid > div {
+    border: solid 1px rgba(0, 0, 0, 0.787);
+  }
